@@ -1,0 +1,15 @@
+<wxs src="../../utils/format.wxs" module="format"></wxs>
+<view class="item">
+    <view class="album">
+    <!-- 直接为image添加mode属性为widthFix不太妥当，后端传来图片尺寸不同的话，实际每个item的高度也不太一样 -->
+        <!-- <image  mode="widthFix" class="image" src="{{item.cover}}"></image> -->
+        <image  class="image" src="{{item.cover}}"></image>
+        <view class="info">
+            <view class="count">{{format.formatCount(item.playCount)}}</view>
+            <view class="duration">{{format.formatDuration(item.mv.videos[0].duration)}}</view>
+        </view>
+    </view>
+    <view class="content">
+        {{item.name}} - {{item.artistName}}
+    </view>
+</view>

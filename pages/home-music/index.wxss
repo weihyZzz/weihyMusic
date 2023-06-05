@@ -1,0 +1,14 @@
+/* pages/home-music/index.wxss */
+/* 修改vant组件内部样式 */
+.van-search__content {
+    background-color: #fff !important;
+}
+.swiper {
+    width: 100%;
+}
+.swiper-item {
+    display: flex;
+}
+.swiper-item .swiper-image {
+    width: 100%;
+}

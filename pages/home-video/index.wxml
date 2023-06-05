@@ -1,0 +1,7 @@
+
+<view class="video">
+    <view class="item" wx:for="{{topMVs}}" wx:key="id">
+    <!-- data-item会为每个视频组件绑定一个item信息，触发事件时可以从中获取item的具体内容，例如视频地址等等 -->
+        <video-item-v1 item="{{item}}" bindtap="handleVideoItemClick" data-item="{{item}}"></video-item-v1>
+    </view>
+</view>
