@@ -5,6 +5,7 @@ export default function (selector) {
         // Rect矩形内包含宽度和高度
         query.select(selector).boundingClientRect()
         query.exec((res) => {
+            console.log(res);
             resolve(res)
         })
     })  
