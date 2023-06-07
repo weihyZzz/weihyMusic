@@ -28,3 +28,8 @@
         </swiper-item>
     </block>
 </swiper>
+
+<!-- 3.推荐歌曲 -->
+<view class="recommend-song">
+    <area-header></area-header>
+</view>
