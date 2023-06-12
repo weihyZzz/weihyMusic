@@ -31,5 +31,26 @@
 
 <!-- 3.推荐歌曲 -->
 <view class="recommend-song">
-    <area-header></area-header>
+    <area-header title="推荐歌曲"></area-header>
+    <view >
+        <block wx:for="{{recommendSongs}}" wx:key="id">
+            <song-item-v1 item="{{item}}"></song-item-v1>
+        </block>
+    </view>
+
 </view>
+
+<!-- 4.热门歌单 -->
+<song-menu-area 
+    title="热门歌单"
+    songMenu="{{hotSongMenu}}"
+>
+</song-menu-area>
+
+<!-- 5.推荐歌单 -->
+<song-menu-area
+    title="推荐歌单"
+    songMenu="{{recommendSongMenu}}"
+>
+
+</song-menu-area>

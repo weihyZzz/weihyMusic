@@ -1,5 +1,5 @@
 // pages/home-music/index.js
-import { getBanners } from '../../service/api_music'
+import { getBanners, getSongMenu } from '../../service/api_music'
 
 import { rankingStore } from '../../store/index'
 import queryRect from '../../utils/query-rect'
@@ -10,7 +10,9 @@ Page({
     data: {
         banners: [],
         swiperHeight: 0,
-        recommendSongs: []
+        recommendSongs: [],
+        hotSongMenu: [],
+        recommendSongMenu: []
     },
     /**
      * 生命周期函数--监听页面加载
@@ -31,8 +33,12 @@ Page({
     // 网络请求函数
     getPageData: async function() {
         const res = await getBanners()
+        const res2 = await getSongMenu()
+        const res3 = await getSongMenu("华语")
         console.log(res);
         this.setData({ banners: res.banners })
+        this.setData({ hotSongMenu: res2.playlists })
+        this.setData({ recommendSongMenu: res3.playlists })
     },
     handleSearchClick: function() {
         console.log('点击搜索框');
