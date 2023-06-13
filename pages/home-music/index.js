@@ -12,7 +12,11 @@ Page({
         swiperHeight: 0,
         recommendSongs: [],
         hotSongMenu: [],
-        recommendSongMenu: []
+        recommendSongMenu: [],
+        netWorkSongs: [], //网络热歌榜
+        newSongs: [], //新歌榜
+        hipopSongs: [], //云音乐说唱榜
+        rankings: { 'netWorkHotRanking': {}, 'newRanking': {}, 'hipopRanking': {} }
     },
     /**
      * 生命周期函数--监听页面加载
@@ -29,6 +33,15 @@ Page({
             const recommendSongs = res.tracks.slice(0,6)
             this.setData({recommendSongs})
         })
+        rankingStore.onState("netWorkHotRanking", (res) => {
+            if(!res.tracks) return
+            const netWorkSongs = res.tracks.slice(0,3)
+            this.setData({ netWorkSongs: netWorkSongs})
+        })
+        // 给rankings赋值
+        rankingStore.onState("newRanking", this.getRankingHandler("newRanking"))
+        rankingStore.onState("netWorkHotRanking", this.getRankingHandler("netWorkHotRanking"))
+        rankingStore.onState("hipopRanking", this.getRankingHandler("hipopRanking"))
     },
     // 网络请求函数
     getPageData: async function() {
@@ -52,5 +65,22 @@ Page({
             const rect = res[0]
             this.setData({ swiperHeight: rect.height })
         })
+    },
+    // 获取store中的榜单数据，并进行进一步处理
+    getRankingHandler: function(rankingName) {
+        return (res) => {
+            if (Object.keys(res).length === 0) return
+            console.log('res', res)
+            const name = res.name
+            const coverImgUrl = res.coverImgUrl
+            const songList = res.tracks.slice(0, 3)
+            const playCount = res.playCount
+            const rankingObj = {name, coverImgUrl, songList, playCount} //构造榜单对象
+            // 要重点理解下面这种赋值方式，将旧数据和处理后的数据进行合并
+            const newRankings = { ...this.data.rankings, [rankingName]: rankingObj } 
+            this.setData({
+                rankings: newRankings
+            })
+        }
     }
 })
