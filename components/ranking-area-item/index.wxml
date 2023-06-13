@@ -1,0 +1,20 @@
+<wxs src="../../utils/format.wxs" module="format"></wxs>
+<view class="item">
+    <view class="content">
+        <view class="content-title">
+            {{rankingData.name}}
+        </view>
+        <view class="content-list">
+            <block wx:for="{{3}}" wx:key="*this" >
+                <view class="content-list-item">
+                    <text>{{index+1}}.{{rankingData.songList[index].name}}</text>
+                    <text class="singer"> - {{rankingData.songList[index].ar[0].name}}</text>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="album">
+        <image class="image" src="{{rankingData.coverImgUrl}}" mode="widthFix"></image>
+        <view class="play-counter">{{format.formatCount(rankingData.playCount)}}</view>
+    </view>
+</view>
