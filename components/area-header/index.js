@@ -28,6 +28,9 @@ Component({
      * 组件的方法列表
      */
     methods: {
-
+        // 向父组件传递事件
+        handleRightClick: function() {
+            this.triggerEvent("click")
+        }
     }
 })

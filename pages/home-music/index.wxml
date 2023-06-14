@@ -31,7 +31,7 @@
 
 <!-- 3.推荐歌曲 -->
 <view class="recommend-song" wx:if="{{recommendSongs.length > 0}}">
-    <area-header title="推荐歌曲"></area-header>
+    <area-header title="推荐歌曲" bind:click="handleMoreClick"></area-header>
     <view >
         <block wx:for="{{recommendSongs}}" wx:key="id">
             <song-item-v1 item="{{item}}"></song-item-v1>
@@ -61,7 +61,12 @@
 <view class="ranking">
     <block wx:for="{{rankings}}" wx:key="name">
         <!-- {{item.name}} - {{index}} -->
-        <ranking-area-item rankingData="{{item}}"></ranking-area-item>
+        <!-- ps: 当遍历的每一项是对象时，index对应的是对象的key值 -->
+        <ranking-area-item 
+            rankingData="{{item}}" 
+            bindtap="handleRankingItemClick"
+            data-idx="{{index}}"
+        ></ranking-area-item>
     </block>
     <!-- <ranking-area-item item="{{item}}"></ranking-area-item> -->
 </view>

@@ -82,5 +82,23 @@ Page({
                 rankings: newRankings
             })
         }
+    },
+    handleMoreClick: function() {
+        // console.log('点击推荐歌曲的更多按钮');
+        // wx.navigateTo({
+        //   url: '/pages/detail-songs/index',
+        // })
+        this.navigateToDetailSongPage("hotRanking")
+    },
+    // 点击巅峰榜中的榜单选项
+    handleRankingItemClick: function(event) {
+        const idx = event.currentTarget.dataset.idx
+        console.log('点击巅峰榜',event.currentTarget.dataset.idx);
+        this.navigateToDetailSongPage(idx)
+    },
+    navigateToDetailSongPage: function(rankingName) {
+        wx.navigateTo({
+          url: `/pages/detail-songs/index?ranking=${rankingName}&type=rank`,
+        })
     }
 })

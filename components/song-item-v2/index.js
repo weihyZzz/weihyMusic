@@ -1,10 +1,14 @@
-// components/ranking-area-item/index.js
+// components/song-item-v2/index.js
 Component({
     /**
      * 组件的属性列表
      */
     properties: {
-        rankingData: {
+        index: {
+            type: Number,
+            value: []
+        },
+        item: {
             type: Object,
             value: {}
         }
@@ -21,6 +25,6 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        
+
     }
 })
