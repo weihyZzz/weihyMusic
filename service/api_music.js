@@ -21,3 +21,12 @@ export function getSongMenu(cat="全部", limit=6, offset=0) {
         offset
     })
 }
+
+
+// 获取歌单详情：名字、具体歌曲等等信息
+export function getSongMenuDetail(id) {
+    // 传入参数：歌单id
+    return diyRequest.get("/playlist/detail", {
+        id
+    })
+}

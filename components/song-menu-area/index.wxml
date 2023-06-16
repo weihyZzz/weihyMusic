@@ -5,7 +5,11 @@
     <block wx:for="{{songMenu}}" wx:key="id">
         <!-- <song-menu-item item="{{item}}"></song-menu-item> -->
         <view class="menu-item">
-            <song-menu-item item="{{item}}"></song-menu-item>
+            <song-menu-item 
+                item="{{item}}"
+                bindtap="handleMenuItemClick"
+                data-item="{{item}}"
+            ></song-menu-item>
         </view>
     </block>
 </scroll-view>
