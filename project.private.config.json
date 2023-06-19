@@ -21,6 +21,13 @@
                     "query": "ranking=hotRanking&type=rank",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "搜索详情页",
+                    "pathName": "pages/detail-search/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

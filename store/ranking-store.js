@@ -19,19 +19,19 @@ const rankingStore = new HYEventStore({
             // 云音乐说唱榜：991319590
             getRankings(3778678).then(res => {
                 ctx.hotRanking = res.playlist
-                console.log('热歌榜', res);
+                // console.log('热歌榜', res);
             })
             getRankings(6723173524).then(res => {
                 ctx.netWorkHotRanking = res.playlist
-                console.log('网络热歌榜', res);
+                // console.log('网络热歌榜', res);
             })
             getRankings(3779629).then(res => {
                 ctx.newRanking = res.playlist
-                console.log('新歌榜', res);
+                // console.log('新歌榜', res);
             })
             getRankings(991319590).then(res => {
                 ctx.hipopRanking = res.playlist
-                console.log('说唱榜', res);
+                // console.log('说唱榜', res);
             })
         }
     }

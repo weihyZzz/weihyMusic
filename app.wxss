@@ -3,3 +3,11 @@ page {
     background-color: #fafafa;
     box-sizing: border-box;
 }
+
+.van-search__content {
+    background-color: #fafafa !important;
+}
+/* 修改vant 的输入框组件的内置padding，需要加!important才能生效 */
+.van-search {
+    padding: 10rpx 0 !important;
+}
