@@ -3,15 +3,28 @@
     background="#fafafa"
     shape="round"
     placeholder="搜索您喜欢的歌曲"
+    bind:change="handleSearchChange"
 >
 </van-search>
 
 <!-- 2.热门搜索 -->
-<view class="hot">
+<view class="hot" wx:if="{{!searchValue.length && !suggestSongs.length}}">
   <area-header showRight="{{false}}" title="热门搜索"></area-header>
   <view class="list">
     <block wx:for="{{hotKeywords}}" wx:key="{{first}}">
       <view class="tag">{{item.first}}</view>
+    </block>
+  </view>
+</view>
+<!-- 搜索建议 -->
+<view class="suggest" wx:else>
+  <view class="title">搜索"{{searchValue}}"</view>
+  <view class="list">
+    <block wx:for="{{suggestSongs}}" wx:key="keyword">
+      <view class="item">
+        <image class="icon" mode="widthFix" src="/assets/images/icons/search_icon.png"></image>
+        <text class="text">{{item.keyword}}</text>
+      </view>
     </block>
   </view>
 </view>

@@ -12,7 +12,6 @@ page {
 .hot .list {
   display: flex;
   flex-wrap: wrap;
-
 }
 .hot .tag {
   font-size: 26rpx;
@@ -24,4 +23,26 @@ page {
 }
 .hot .tag:first-of-type {
   color: #26ce8a;
+}
+
+/* 搜索建议相关样式 */
+.suggest {
+  padding: 10rpx;
+}
+.suggest .title {
+  color: #26ce8a;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+.suggest .item {
+  display: flex;
+  align-items: center;
+  margin-top: 16rpx;
+}
+.suggest .item .icon {
+  width: 66rpx;
+  margin-left: -15rpx;
+}
+.suggest .item .text {
+  font-size: 28rpx;
 }

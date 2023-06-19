@@ -1,8 +1,10 @@
 // pages/home-music/index.js
-import { getSearchHot } from '../../service/api_search'
+import { getSearchHot, getSearchSuggest } from '../../service/api_search'
 Page({
     data: {
-      hotKeywords: []
+      hotKeywords: [],
+      suggestSongs: [], //搜索建议歌曲
+      searchValue: ""
     },
 
     /**
@@ -16,6 +18,21 @@ Page({
         console.log('热门搜索信息:', res);
         const hots = res.result.hots
         this.setData({ hotKeywords: hots })
+      })
+    },
+    handleSearchChange: function(event) {
+      console.log('搜索框输入事件event信息：',event);
+      const searchValue = event.detail
+      // console.log(searchValue);
+      this.setData({ searchValue })
+      // 搜索内容为空则不发送请求
+      if(!searchValue.length) {
+        this.setData({ suggestSongs: [] })
+        return 
+      }
+      getSearchSuggest(searchValue).then(res => {
+        // console.log(res);
+        this.setData({ suggestSongs: res.result.allMatch })
       })
     }
 
