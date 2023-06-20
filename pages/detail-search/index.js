@@ -1,5 +1,8 @@
 // pages/home-music/index.js
 import { getSearchHot, getSearchSuggest } from '../../service/api_search'
+import debounce from '../../utils/debounce'
+// 给搜索建议函数加防抖
+const debounceGetSearchSuggest = debounce(getSearchSuggest, 300)
 Page({
     data: {
       hotKeywords: [],
@@ -30,7 +33,7 @@ Page({
         this.setData({ suggestSongs: [] })
         return 
       }
-      getSearchSuggest(searchValue).then(res => {
+      debounceGetSearchSuggest(searchValue).then(res => {
         // console.log(res);
         this.setData({ suggestSongs: res.result.allMatch })
       })
