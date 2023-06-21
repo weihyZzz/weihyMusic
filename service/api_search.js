@@ -11,3 +11,8 @@ export function getSearchSuggest(keywords) {
     type: "mobile"
   })
 }
+export function getSearchResult(keywords) {
+  return diyRequest.get('/search', {
+    keywords
+  })
+}

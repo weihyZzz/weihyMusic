@@ -1,15 +1,15 @@
 <!--components/song-item-v2/index.wxml-->
-<view class="item">
-    <view class="index">{{index+1}}</view>
-    <view class="info">
-        <view class="name">
-            {{item.name}}
-        </view>
-        <view class="source">
-            <image src="../../assets/images/icons/sq_icon.png" class="icon"></image>
-            <text>{{item.ar[0].name}}</text>
-            <text wx:if="{{item.alia[0]}}" class="dots">·</text>
-            <text wx:if="{{item.alia[0]}}">{{item.alia[0]}}</text>
-        </view>
+<view class="item" bindtap="handleSongItemClick">
+  <view class="index">{{index}}</view>
+  <view class="info">
+    <view class="name">{{item.name}}</view>
+    <view class="source">
+      <image class="icon" src="/assets/images/icons/sq_icon.png"></image>
+      <text>{{item.ar[0].name || item.artists[0].name}} </text>
+      <text wx:if="{{item.alia[0] || item.alias[0]}}">
+        <text class="dots">·</text>
+        <text>{{item.alia[0] || item.alias[0]}}</text>
+      </text>
     </view>
+  </view>
 </view>

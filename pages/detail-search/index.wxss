@@ -1,7 +1,16 @@
 /* pages/detail-search/index.wxss */
 page {
     padding: 0 20rpx;
+    padding-top: 56px;
     /* background-color: pink; */
+}
+
+/* 搜索框 */
+.search {
+  position: fixed;
+  top: 0;
+  left: 20rpx;
+  right: 20rpx;
 }
 
 /* 热门搜索 */

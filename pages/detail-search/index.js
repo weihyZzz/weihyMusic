@@ -1,5 +1,5 @@
 // pages/home-music/index.js
-import { getSearchHot, getSearchSuggest } from '../../service/api_search'
+import { getSearchHot, getSearchSuggest, getSearchResult } from '../../service/api_search'
 import stringToNodes from '../../utils/string2nodes'
 import debounce from '../../utils/debounce'
 // 给搜索建议函数加防抖
@@ -8,6 +8,8 @@ Page({
     data: {
       hotKeywords: [],
       suggestSongs: [], //搜索建议歌曲
+      suggestSongNodes: [],
+      resultSongs: [],
       searchValue: ""
     },
 
@@ -26,7 +28,7 @@ Page({
     },
     handleSearchChange: function(event) {
         // 1.获取输入的关键字
-        console.log('搜索框输入事件event信息：',event);
+        // console.log('搜索框输入事件event信息：',event);
         const searchValue = event.detail
         // console.log(searchValue);
         // 2.保存关键字
@@ -34,6 +36,7 @@ Page({
         // 3.判断关键字为空字符的处理逻辑
         if(!searchValue.length) {
             this.setData({ suggestSongs: [] })
+            this.setData({ resultSongs: [] })
             return 
         }
         // 4.根据关键字搜索
@@ -52,6 +55,21 @@ Page({
             this.setData({ suggestSongNodes })
             console.log('----存储成功');
         })
+    },
+    handleSearchAction: function() {
+      const searchValue = this.data.searchValue
+      getSearchResult(searchValue).then(res => {
+        console.log('res',res);
+        this.setData({ resultSongs: res.result.songs })
+      })
+    },
+    handleKeywordItemClick: function(event) {
+      // 1.获取点击的关键词
+      const keyword = event.currentTarget.dataset.keyword
+      this.setData({searchValue: keyword})
+      // 2.发送网络请求
+      this.handleSearchAction()
+      // console.log(keyword);
     }
 
 })
