@@ -1,5 +1,6 @@
 // pages/home-music/index.js
 import { getSearchHot, getSearchSuggest } from '../../service/api_search'
+import stringToNodes from '../../utils/string2nodes'
 import debounce from '../../utils/debounce'
 // 给搜索建议函数加防抖
 const debounceGetSearchSuggest = debounce(getSearchSuggest, 300)
@@ -24,19 +25,33 @@ Page({
       })
     },
     handleSearchChange: function(event) {
-      console.log('搜索框输入事件event信息：',event);
-      const searchValue = event.detail
-      // console.log(searchValue);
-      this.setData({ searchValue })
-      // 搜索内容为空则不发送请求
-      if(!searchValue.length) {
-        this.setData({ suggestSongs: [] })
-        return 
-      }
-      debounceGetSearchSuggest(searchValue).then(res => {
-        // console.log(res);
-        this.setData({ suggestSongs: res.result.allMatch })
-      })
+        // 1.获取输入的关键字
+        console.log('搜索框输入事件event信息：',event);
+        const searchValue = event.detail
+        // console.log(searchValue);
+        // 2.保存关键字
+        this.setData({ searchValue })
+        // 3.判断关键字为空字符的处理逻辑
+        if(!searchValue.length) {
+            this.setData({ suggestSongs: [] })
+            return 
+        }
+        // 4.根据关键字搜索
+        debounceGetSearchSuggest(searchValue).then(res => {
+            // console.log(res);
+            // 1.保存关键字相关的歌曲
+            const suggestSongs = res.result.allMatch
+            this.setData({ suggestSongs: suggestSongs})
+            // 2.处理成nodes结点
+            const suggestKeywords = suggestSongs.map(item => item.keyword)
+            const suggestSongNodes = []
+            for (const keyword of suggestKeywords) {
+                const nodes = stringToNodes(keyword, searchValue)
+                suggestSongNodes.push(nodes)
+            }
+            this.setData({ suggestSongNodes })
+            console.log('----存储成功');
+        })
     }
 
 })

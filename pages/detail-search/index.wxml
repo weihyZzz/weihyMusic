@@ -23,7 +23,8 @@
     <block wx:for="{{suggestSongs}}" wx:key="keyword">
       <view class="item">
         <image class="icon" mode="widthFix" src="/assets/images/icons/search_icon.png"></image>
-        <text class="text">{{item.keyword}}</text>
+        <!-- <text class="text">{{item.keyword}}</text> -->
+        <rich-text nodes="{{suggestSongNodes[index]}}"></rich-text>
       </view>
     </block>
   </view>
