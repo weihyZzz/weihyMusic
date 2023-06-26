@@ -1,1 +1,13 @@
 /* pages/music-player/index.wxss */
+.bg-image, .bg-cover {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.bg-cover {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
