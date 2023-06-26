@@ -28,6 +28,13 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "音乐播放页面",
+                    "pathName": "pages/music-player/index",
+                    "query": "id=2049512697",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }
