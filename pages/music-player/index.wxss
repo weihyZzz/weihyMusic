@@ -1,4 +1,7 @@
 /* pages/music-player/index.wxss */
+page {
+    color: #fff;
+}
 .bg-image, .bg-cover {
     position: fixed;
     width: 100%;

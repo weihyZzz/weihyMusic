@@ -1,0 +1,20 @@
+<!--baseui/nav-bar/index.wxml-->
+<view class="nav">
+    <!-- 用于占位状态栏 -->
+    <view style="height: {{statusBarHeight}}px;" class="head"></view>
+    <view class="nav-bar" style="height: {{navBarHeight}}px;">
+        <view class="left">
+            <!-- navbar左侧的插槽 -->
+            <view class="left-slot"><slot name="left"></slot></view>
+            <view class="left-arrow">
+                <image class="icon" src="/assets/images/icons/arrow-left.png" mode="widthFix"></image>
+            </view>
+        </view>
+        <view class="center">
+            <!-- 标题处的插槽 -->
+            <view class="center-slot"><slot name="title"></slot></view>
+            <view class="center-title">{{title}}</view>
+        </view>
+        <view class="right"></view>
+    </view>
+</view>

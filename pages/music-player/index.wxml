@@ -2,3 +2,9 @@
 <!-- 1.背景 -->
 <image class="bg-image" mode="aspectFill" src="{{currentSong.al.picUrl}}"></image>
 <view class="bg-cover"></view>
+
+<!-- 2.导航栏 -->
+<nav-bar>
+    <!-- <view slot="left"></view>
+    <view slot="title">音乐</view> -->
+</nav-bar>

@@ -1,0 +1,46 @@
+/* baseui/nav-bar/index.wxss */
+/* .nav .head {
+    background-color: red;
+} */
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nav-bar .left {
+    width: 120rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-bar .right {
+    width: 120rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* 通过css实现默认插槽 */
+.left-arrow {
+    display: none;
+}
+.left-slot:empty + .left-arrow {
+    display: block;
+}
+.nav-bar .center {
+    flex: 1;
+}
+.center-title {
+    display: none;
+}
+.center-slot:empty + .center-title {
+    display: block;
+}
+
+.left .left-arrow .icon {
+    width: 44rpx;
+    display: block;
+}
