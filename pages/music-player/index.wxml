@@ -5,6 +5,19 @@
 
 <!-- 2.导航栏 -->
 <nav-bar>
-    <!-- <view slot="left"></view>
-    <view slot="title">音乐</view> -->
+    <view slot="title" class="tab">
+        <view class="{{currentPage === 0 ? 'active': ''}}">歌曲</view>
+        <view class="divider">|</view>
+        <view class="{{currentPage === 1 ? 'active': ''}}">歌词</view>
+    </view>
 </nav-bar>
+
+<!-- 3.内容 -->
+<swiper 
+    class="content"
+    style="height: {{contentHeight}}px;"
+    bindchange="handleSwiperChange"
+>
+    <swiper-item>1</swiper-item>
+    <swiper-item>2</swiper-item>
+</swiper>
