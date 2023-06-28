@@ -9,7 +9,9 @@ Page({
       id: 0,
       currentSong: {},
       currentPage: 0,
-      contentHeight: 0
+      contentHeight: 0,
+
+      isMusicLyric: true,
     },
 
     /**
@@ -26,8 +28,15 @@ Page({
        const screenHeight = globalData.screenHeight
        const statusBarHeight = globalData.statusBarHeight
        const navBarHeight = globalData.navBarHeight
+       const deviceRadio = globalData.deviceRadio
        const contentHeight = screenHeight - statusBarHeight - navBarHeight
        this.setData({contentHeight})
+        //屏幕宽高比大于2则显示歌曲页面的歌词view
+       this.setData({isMusicLyric: deviceRadio>=2})
+        // 4.创建播放器
+        const audioContext = wx.createInnerAudioContext()
+        audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+        audioContext.play()
     },
     getPageData: function(id) {
         getSongDetail(id).then(res => {

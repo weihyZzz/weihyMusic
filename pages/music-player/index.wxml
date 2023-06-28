@@ -20,16 +20,16 @@
 >
     <swiper-item class="music">
         <view class="album">
-            <image class="image" mode="aspectFill" src="https://p1.music.126.net/TmOHxaGnFNlwNX8aPz66oA==/109951168638913915.jpg"></image>
+            <image class="image" mode="aspectFill" src="{{currentSong.al.picUrl}}"></image>
         </view>
         <view class="info">
-            <view class="title">向云端</view>
+            <view class="title">{{currentSong.name}}</view>
             <view class="subtitle">
-                <view class="singer">小霞</view>
-                <view class="alias">海洋Bo</view>
+                <view class="singer">{{currentSong.ar[0].name}}</view>
+                <view class="alias">{{currentSong.al.name}}</view>
             </view>
         </view>
-        <view class="lyric">我是歌词</view>
+        <view class="lyric" wx:if="{{isMusicLyric}}">我是歌词</view>
         <view class="progress">
             <slider class="slider" block-size="{{12}}"></slider>
             <view class="time">

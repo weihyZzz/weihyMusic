@@ -46,6 +46,11 @@ page {
     flex: 5;
     /* background-color: red; */
 }
+.album .image {
+    width: 100%;
+    height: 100%;
+    border-radius: 12rpx;
+}
 
 /* 歌曲信息 */
 .music .info {
