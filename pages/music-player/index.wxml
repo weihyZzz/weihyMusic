@@ -18,6 +18,32 @@
     style="height: {{contentHeight}}px;"
     bindchange="handleSwiperChange"
 >
-    <swiper-item>1</swiper-item>
-    <swiper-item>2</swiper-item>
+    <swiper-item class="music">
+        <view class="album">
+            <image class="image" mode="aspectFill" src="https://p1.music.126.net/TmOHxaGnFNlwNX8aPz66oA==/109951168638913915.jpg"></image>
+        </view>
+        <view class="info">
+            <view class="title">向云端</view>
+            <view class="subtitle">
+                <view class="singer">小霞</view>
+                <view class="alias">海洋Bo</view>
+            </view>
+        </view>
+        <view class="lyric">我是歌词</view>
+        <view class="progress">
+            <slider class="slider" block-size="{{12}}"></slider>
+            <view class="time">
+                <view class="current">01:22</view>
+                <view class="duration">04:22</view>
+            </view>
+        </view>
+        <view class="operation">
+            <image class="btn btn-mode" src="/assets/images/player/play_order.png"></image>
+            <image class="btn btn-prev" src="/assets/images/player/play_prev.png"></image>
+            <image class="btn btn-pause" src="/assets/images/player/play_pause.png"></image>
+            <image class="btn btn-next" src="/assets/images/player/play_next.png"></image>
+            <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
+        </view>
+    </swiper-item>
+    <swiper-item class="lyric">2</swiper-item>
 </swiper>
