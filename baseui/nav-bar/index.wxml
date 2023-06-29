@@ -6,7 +6,7 @@
         <view class="left">
             <!-- navbar左侧的插槽 -->
             <view class="left-slot"><slot name="left"></slot></view>
-            <view class="left-arrow">
+            <view class="left-arrow" bindtap="handleBack">
                 <image class="icon" src="/assets/images/icons/arrow-left.png" mode="widthFix"></image>
             </view>
         </view>

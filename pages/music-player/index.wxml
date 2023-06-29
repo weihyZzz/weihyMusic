@@ -1,4 +1,5 @@
 <!--pages/music-player/index.wxml-->
+<wxs src="../../utils/format.wxs" module="format"></wxs>
 <!-- 1.背景 -->
 <image class="bg-image" mode="aspectFill" src="{{currentSong.al.picUrl}}"></image>
 <view class="bg-cover"></view>
@@ -31,10 +32,16 @@
         </view>
         <view class="lyric" wx:if="{{isMusicLyric}}">我是歌词</view>
         <view class="progress">
-            <slider class="slider" block-size="{{12}}"></slider>
+            <slider 
+              class="slider"
+              block-size="{{12}}" 
+              value="{{sliderValue}}"
+              bindchanging="handleSliderChanging"
+              bindchange="handleSliderChange"
+            ></slider>
             <view class="time">
-                <view class="current">01:22</view>
-                <view class="duration">04:22</view>
+                <view class="current">{{format.formatDuration(currentTime)}}</view>
+                <view class="duration">{{format.formatDuration(durationTime)}}</view>
             </view>
         </view>
         <view class="operation">
