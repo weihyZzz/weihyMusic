@@ -1,7 +1,8 @@
 // pages/music-player/index.js
 
-import { getSongDetail } from '../../service/api_player'
+import { getSongDetail, getSongLyric } from '../../service/api_player'
 import { audioContext } from '../../store/index'
+import { parseLyric } from '../../utils/parse-lyric'
 Page({
 
     /**
@@ -43,37 +44,43 @@ Page({
         audioContext.stop()
         audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
         audioContext.autoplay = true
-        audioContext.onCanplay(() => {
-          audioContext.play()
-        })
-        // 监听播放音乐时间的改变
-        audioContext.onTimeUpdate(() => {
-          // 1.获取当前音乐时间(返回的是秒，转换成毫秒)
-          const currentTime =  audioContext.currentTime * 1000
-          // console.log(currentTime);
-         
-          // 2.根据当前时间修改sliderValue
-          if(!this.data.isSliderChanging) {
-            //只有没在滑动的时候才可以更改sliderValue
-            const sliderValue = currentTime / this.data.durationTime * 100
-            this.setData({sliderValue, currentTime})
-          }
-          // //只有没在滑动的时候才可以更改sliderValue
-          const sliderValue = currentTime / this.data.durationTime * 100
-          this.setData({sliderValue, currentTime})
-        })
+        // 5.audioContext事件监听
+        this.setupAudioContextListener()
     },
     // ========================   网络请求   ======================== 
     getPageData: function(id) {
+        // 获取歌曲详情信息
         getSongDetail(id).then(res => {
             // this.setData({currentSong: r})
             console.log(res);
             this.setData({ currentSong: res.songs[0], durationTime: res.songs[0].dt })
         })
+        // 获取歌词信息
+        getSongLyric(id).then(res => {
+          const lyricString = res.lrc.lyric
+          // console.log(lyricString);
+          const lyricInfos = parseLyric(lyricString)
+          console.log('lyricInfos', lyricInfos);
+        })
     },
       // ========================   audio监听   ======================== 
     setupAudioContextListener: function() {
-      
+      audioContext.onCanplay(() => {
+        audioContext.play()
+      })
+      // 监听播放音乐时间的改变
+      audioContext.onTimeUpdate(() => {
+        // 1.获取当前音乐时间(返回的是秒，转换成毫秒)
+        const currentTime =  audioContext.currentTime * 1000
+        // console.log(currentTime);
+       
+        // 2.根据当前时间修改sliderValue
+        if(!this.data.isSliderChanging) {
+          //只有没在滑动的时候才可以更改sliderValue
+          const sliderValue = currentTime / this.data.durationTime * 100
+          this.setData({sliderValue, currentTime})
+        }
+      })
     },
     // 事件处理
     handleSwiperChange: function(event) {
