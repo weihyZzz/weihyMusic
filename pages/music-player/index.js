@@ -13,6 +13,9 @@ Page({
       currentSong: {},
       currentPage: 0,
       contentHeight: 0,
+      lyricInfos: [],
+      currentLyricIndex: 0,//缓存当前歌词序号
+      currentLyricText: "",//缓存当前歌词内容
 
       isMusicLyric: true,
       durationTime: 0,
@@ -60,7 +63,8 @@ Page({
           const lyricString = res.lrc.lyric
           // console.log(lyricString);
           const lyricInfos = parseLyric(lyricString)
-          console.log('lyricInfos', lyricInfos);
+          // console.log('lyricInfos', lyricInfos);
+          this.setData({lyricInfos: lyricInfos})
         })
     },
       // ========================   audio监听   ======================== 
@@ -79,6 +83,21 @@ Page({
           //只有没在滑动的时候才可以更改sliderValue
           const sliderValue = currentTime / this.data.durationTime * 100
           this.setData({sliderValue, currentTime})
+        }
+        // 3.根据当前时间来查找播放到的具体歌词
+        let i = 0
+        for(; i < this.data.lyricInfos.length; i++) {
+          const lyricInfo = this.data.lyricInfos[i]
+          if(currentTime < lyricInfo.time) {
+            // 如果当前时间小于 当前歌词项的时间，则 显示的则是当前项的前一项
+            break
+          }
+        }
+        // break跳出循环则找到当前歌词的索引
+        const currentIndex= i - 1
+        if (this.data.currentLyricIndex !== currentIndex) {
+          const currentLyricInfo = this.data.lyricInfos[currentIndex]
+          this.setData({ currentLyricIndex: currentIndex, currentLyricText:currentLyricInfo.text })
         }
       })
     },

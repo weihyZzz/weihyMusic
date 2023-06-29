@@ -30,7 +30,7 @@
                 <view class="alias">{{currentSong.al.name}}</view>
             </view>
         </view>
-        <view class="lyric" wx:if="{{isMusicLyric}}">我是歌词</view>
+        <view class="lyric" wx:if="{{isMusicLyric}}">{{currentLyricText}}</view>
         <view class="progress">
             <slider 
               class="slider"
