@@ -1,7 +1,7 @@
 // pages/music-player/index.js
 
-import { getSongDetail, getSongLyric } from '../../service/api_player'
-import { audioContext } from '../../store/index'
+// import { getSongDetail, getSongLyric } from '../../service/api_player'
+import { audioContext, playerStore } from '../../store/index'
 import { parseLyric } from '../../utils/parse-lyric'
 Page({
 
@@ -34,7 +34,8 @@ Page({
       const id = options.id
       this.setData({id: id})
         // 2.根据id获取歌曲详情信息
-      this.getPageData(id)
+        // this.getPageData(id)
+        this.setupPlayerStoreListener()
        //  3.动态计算内容页高度
        const globalData = getApp().globalData
        const screenHeight = globalData.screenHeight
@@ -53,22 +54,22 @@ Page({
         this.setupAudioContextListener()
     },
     // ========================   网络请求   ======================== 
-    getPageData: function(id) {
-        // 获取歌曲详情信息
-        getSongDetail(id).then(res => {
-            // this.setData({currentSong: r})
-            console.log(res);
-            this.setData({ currentSong: res.songs[0], durationTime: res.songs[0].dt })
-        })
-        // 获取歌词信息
-        getSongLyric(id).then(res => {
-          const lyricString = res.lrc.lyric
-          // console.log(lyricString);
-          const lyricInfos = parseLyric(lyricString)
-          // console.log('lyricInfos', lyricInfos);
-          this.setData({lyricInfos: lyricInfos})
-        })
-    },
+    // getPageData: function(id) {
+    //     // 获取歌曲详情信息
+    //     getSongDetail(id).then(res => {
+    //         // this.setData({currentSong: r})
+    //         console.log(res);
+    //         this.setData({ currentSong: res.songs[0], durationTime: res.songs[0].dt })
+    //     })
+    //     // 获取歌词信息
+    //     getSongLyric(id).then(res => {
+    //       const lyricString = res.lrc.lyric
+    //       // console.log(lyricString);
+    //       const lyricInfos = parseLyric(lyricString)
+    //       // console.log('lyricInfos', lyricInfos);
+    //       this.setData({lyricInfos: lyricInfos})
+    //     })
+    // },
       // ========================   audio监听   ======================== 
     setupAudioContextListener: function() {
       audioContext.onCanplay(() => {
@@ -129,5 +130,18 @@ Page({
       const currentTime = this.data.durationTime * value / 100
       this.setData({isSliderChanging: true, currentTime: currentTime, sliderValue: value})
       console.log('滑动中，禁止更改sliderValue');
-    } 
+    },
+    setupPlayerStoreListener: function() {
+        // onStates可以同时监听多个状态
+        playerStore.onStates(["currentSong", "durationTime", "lyricInfos"], ({
+            currentSong,
+            durationTime,
+            lyricInfos
+        }) => {
+            // 监听状态时，如果其中某一个没更新，则不会返回。所以先判断是否为空
+            if (currentSong) this.setData({ currentSong })
+            if (durationTime) this.setData({ durationTime })
+            if (lyricInfos) this.setData({ lyricInfos })
+        })
+    }
 })
