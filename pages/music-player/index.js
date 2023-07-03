@@ -2,24 +2,27 @@
 
 // import { getSongDetail, getSongLyric } from '../../service/api_player'
 import { audioContext, playerStore } from '../../store/index'
-import { parseLyric } from '../../utils/parse-lyric'
+// import { parseLyric } from '../../utils/parse-lyric'
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
       id: 0,
+
       currentSong: {},
       currentPage: 0,
-      contentHeight: 0,
       lyricInfos: [],
+
+      contentHeight: 0,
+
+      currentTime: 0,
       currentLyricIndex: 0,//缓存当前歌词序号
       currentLyricText: "",//缓存当前歌词内容
 
       isMusicLyric: true,
       durationTime: 0,
-      currentTime: 0,
+    
       sliderValue: 0,
       isSliderChanging: false, //标志是否在拖动滑动条
 
@@ -51,59 +54,7 @@ Page({
         // audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
         // audioContext.autoplay = true
         // 5.audioContext事件监听
-        this.setupAudioContextListener()
-    },
-    // ========================   网络请求   ======================== 
-    // getPageData: function(id) {
-    //     // 获取歌曲详情信息
-    //     getSongDetail(id).then(res => {
-    //         // this.setData({currentSong: r})
-    //         console.log(res);
-    //         this.setData({ currentSong: res.songs[0], durationTime: res.songs[0].dt })
-    //     })
-    //     // 获取歌词信息
-    //     getSongLyric(id).then(res => {
-    //       const lyricString = res.lrc.lyric
-    //       // console.log(lyricString);
-    //       const lyricInfos = parseLyric(lyricString)
-    //       // console.log('lyricInfos', lyricInfos);
-    //       this.setData({lyricInfos: lyricInfos})
-    //     })
-    // },
-      // ========================   audio监听   ======================== 
-    setupAudioContextListener: function() {
-      audioContext.onCanplay(() => {
-        audioContext.play()
-      })
-      // 监听播放音乐时间的改变
-      audioContext.onTimeUpdate(() => {
-        // 1.获取当前音乐时间(返回的是秒，转换成毫秒)
-        const currentTime =  audioContext.currentTime * 1000
-        // console.log(currentTime);
-       
-        // 2.根据当前时间修改sliderValue
-        if(!this.data.isSliderChanging) {
-          //只有没在滑动的时候才可以更改sliderValue
-          const sliderValue = currentTime / this.data.durationTime * 100
-          this.setData({sliderValue, currentTime})
-        }
-        // 3.根据当前时间来查找播放到的具体歌词
-        let i = 0
-        for(; i < this.data.lyricInfos.length; i++) {
-          const lyricInfo = this.data.lyricInfos[i]
-          if(currentTime < lyricInfo.time) {
-            // 如果当前时间小于 当前歌词项的时间，则 显示的则是当前项的前一项
-            break
-          }
-        }
-        // break跳出循环则找到当前歌词的索引
-        const currentIndex= i - 1
-        if (this.data.currentLyricIndex !== currentIndex) {
-          const currentLyricInfo = this.data.lyricInfos[currentIndex]
-          this.setData({ currentLyricIndex: currentIndex, currentLyricText:currentLyricInfo.text })
-          this.setData({ lyricScrollTop: this.data.currentLyricIndex*35 })
-        }
-      })
+        // this.setupAudioContextListener()
     },
     // 事件处理
     handleSwiperChange: function(event) {
@@ -128,12 +79,13 @@ Page({
     handleSliderChanging: function(event) {
       const value = event.detail.value
       const currentTime = this.data.durationTime * value / 100
-      this.setData({isSliderChanging: true, currentTime: currentTime, sliderValue: value})
-      console.log('滑动中，禁止更改sliderValue');
+      this.setData({isSliderChanging: true, currentTime: currentTime})
+    //   console.log('滑动中，禁止更改sliderValue');
     },
     // 数据监听
     setupPlayerStoreListener: function() {
         // onStates可以同时监听多个状态
+        // 1.监听currentSong/durationTime/lyricInfos
         playerStore.onStates(["currentSong", "durationTime", "lyricInfos"], ({
             currentSong,
             durationTime,
@@ -143,6 +95,25 @@ Page({
             if (currentSong) this.setData({ currentSong })
             if (durationTime) this.setData({ durationTime })
             if (lyricInfos) this.setData({ lyricInfos })
+        })
+        // 2.监听currentTime/currentLyricIndex/currentLyricText
+        playerStore.onStates(["currentTime", "currentLyricIndex", "currentLyricText"], ({
+            currentTime,
+            currentLyricIndex,
+            currentLyricText
+        }) => {
+            if (currentTime && !this.data.isSliderChanging) {
+                // 计算slider的值
+                const sliderValue = currentTime / this.data.durationTime * 100
+                this.setData({sliderValue, currentTime})
+            }
+            if (currentLyricIndex) {
+                // 歌词变化，则更新歌词页面的scrollTop
+                this.setData({ currentLyricIndex, lyricScrollTop: currentLyricIndex * 35 })
+            }
+            if (currentLyricText) {
+                this.setData({ currentLyricText })
+            }
         })
     },
     handleBackClick: function() {
