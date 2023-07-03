@@ -3,6 +3,7 @@
 // import { getSongDetail, getSongLyric } from '../../service/api_player'
 import { audioContext, playerStore } from '../../store/index'
 // import { parseLyric } from '../../utils/parse-lyric'
+const playModeNames = ["order", "repeat", "random"]
 Page({
     /**
      * 页面的初始数据
@@ -23,6 +24,9 @@ Page({
       isMusicLyric: true,
       durationTime: 0,
     
+      playModeIndex: 0,
+      playModeName: "order",
+
       sliderValue: 0,
       isSliderChanging: false, //标志是否在拖动滑动条
 
@@ -115,8 +119,22 @@ Page({
                 this.setData({ currentLyricText })
             }
         })
+        // 3.监听播放模式相关的数据，例如playModeIndex
+        playerStore.onStates(["playModeIndex"], ({playModeIndex}) => {
+            if (playModeIndex !== undefined) {
+                // 更新播放模式
+                this.setData({ playModeIndex, playModeName:  playModeNames[playModeIndex]})
+            }
+        })
     },
     handleBackClick: function() {
         wx.navigateBack()
+    },
+    handleModeBtnClick: function() {
+        // 计算点击后的新playModeIndex 满3则变为0
+        let playModeIndex = this.data.playModeIndex + 1
+        if (playModeIndex === 3) playModeIndex = 0
+        // 更新状态管理中的playModeIndex
+        playerStore.setState("playModeIndex", playModeIndex)
     }
 })

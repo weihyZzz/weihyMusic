@@ -13,6 +13,8 @@ const playerStore = new HYEventStore({
         currentTime: 0,
         currentLyricIndex: 0,
         currentLyricText: "",
+
+        playModeIndex: 0, //标识播放状态 0:顺序播放 1: 单曲循环 2: 随机播放
     },
     actions: {
         playMusicWithSongIdAction(ctx, { id }) {
