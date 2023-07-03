@@ -52,5 +52,21 @@
             <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
         </view>
     </swiper-item>
-    <swiper-item class="lyric">2</swiper-item>
+    <swiper-item class="lyric">
+        <scroll-view 
+            class="lyric-list"
+            scroll-y
+            scroll-top="{{lyricScrollTop}}"
+        >
+            <block  wx:for="{{lyricInfos}}" wx:key="index">
+                <!-- 当前歌词增添active样式， 第一条歌词和最后一条歌词添加padding -->
+                <view 
+                    class="item {{currentLyricIndex === index ? 'active': ''}}"
+                    style="padding-top: {{index === 0 ? (contentHeight/2 - 80): 0}}px; padding-bottom: {{index === lyricInfos.length - 1 ? (contentHeight/2 + 80): 0}}px;"
+                >
+                    {{item.text}}
+                </view>
+            </block>
+        </scroll-view>
+    </swiper-item>
 </swiper>
