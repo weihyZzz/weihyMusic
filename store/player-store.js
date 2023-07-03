@@ -13,6 +13,7 @@ const playerStore = new HYEventStore({
     actions: {
         playMusicWithSongIdAction(ctx, { id }) {
             ctx.id = id
+            // 1.获取数据
             // 获取歌曲详情信息
             getSongDetail(id).then(res => {
                 // this.setData({currentSong: r})
@@ -27,6 +28,10 @@ const playerStore = new HYEventStore({
                 const lyrics = parseLyric(lyricString)
                 ctx.lyricInfos = lyrics
             })
+            // 2.播放歌曲
+            audioContext.stop()
+            audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+            audioContext.autoplay = true
         }
     }
 })

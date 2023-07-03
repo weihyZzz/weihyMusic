@@ -47,9 +47,9 @@ Page({
         //屏幕宽高比大于2则显示歌曲页面的歌词view
        this.setData({isMusicLyric: deviceRadio>=2})
         // 4.采用audioContext播放音乐
-        audioContext.stop()
-        audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
-        audioContext.autoplay = true
+        // audioContext.stop()
+        // audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+        // audioContext.autoplay = true
         // 5.audioContext事件监听
         this.setupAudioContextListener()
     },
@@ -131,6 +131,7 @@ Page({
       this.setData({isSliderChanging: true, currentTime: currentTime, sliderValue: value})
       console.log('滑动中，禁止更改sliderValue');
     },
+    // 数据监听
     setupPlayerStoreListener: function() {
         // onStates可以同时监听多个状态
         playerStore.onStates(["currentSong", "durationTime", "lyricInfos"], ({
@@ -143,5 +144,8 @@ Page({
             if (durationTime) this.setData({ durationTime })
             if (lyricInfos) this.setData({ lyricInfos })
         })
+    },
+    handleBackClick: function() {
+        wx.navigateBack()
     }
 })

@@ -22,7 +22,9 @@ Component({
      */
     methods: {
       handleBack: function() {
-        wx.navigateBack()
+        // wx.navigateBack()
+        // 不直接将事件写死，而是向外传递事件，由具体页面决定处理逻辑
+        this.triggerEvent('click')
       }
     }
 })

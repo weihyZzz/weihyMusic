@@ -3,10 +3,10 @@
     <!-- 用于占位状态栏 -->
     <view style="height: {{statusBarHeight}}px;" class="head"></view>
     <view class="nav-bar" style="height: {{navBarHeight}}px;">
-        <view class="left">
+        <view class="left"  bindtap="handleBack">
             <!-- navbar左侧的插槽 -->
             <view class="left-slot"><slot name="left"></slot></view>
-            <view class="left-arrow" bindtap="handleBack">
+            <view class="left-arrow">
                 <image class="icon" src="/assets/images/icons/arrow-left.png" mode="widthFix"></image>
             </view>
         </view>
