@@ -23,7 +23,10 @@ Page({
 
       isMusicLyric: true,
       durationTime: 0,
-    
+        
+      isPlaying: false,
+      playingName: 'pause',
+
       playModeIndex: 0,
       playModeName: "order",
 
@@ -120,10 +123,14 @@ Page({
             }
         })
         // 3.监听播放模式相关的数据，例如playModeIndex
-        playerStore.onStates(["playModeIndex"], ({playModeIndex}) => {
+        playerStore.onStates(["playModeIndex", "isPlaying"], ({playModeIndex, isPlaying}) => {
             if (playModeIndex !== undefined) {
                 // 更新播放模式
                 this.setData({ playModeIndex, playModeName:  playModeNames[playModeIndex]})
+            }
+            if (isPlaying !== undefined) {
+                // pause: 播放状态， resume 暂停状态
+                this.setData({ isPlaying, playingName: isPlaying ? "pause":"resume" })
             }
         })
     },
@@ -131,10 +138,18 @@ Page({
         wx.navigateBack()
     },
     handleModeBtnClick: function() {
-        // 计算点击后的新playModeIndex 满3则变为0
-        let playModeIndex = this.data.playModeIndex + 1
-        if (playModeIndex === 3) playModeIndex = 0
-        // 更新状态管理中的playModeIndex
-        playerStore.setState("playModeIndex", playModeIndex)
+        // 方法1: 直接修改
+        // // 计算点击后的新playModeIndex 满3则变为0
+        // let playModeIndex = this.data.playModeIndex + 1
+        // if (playModeIndex === 3) playModeIndex = 0
+        // // 更新状态管理中的playModeIndex
+        // playerStore.setState("playModeIndex", playModeIndex)
+        
+        // 方法2:派发到状态管理库进行修改
+        playerStore.dispatch("changeMusicPlayModeAction")
+    },
+    handlePlayBtnClick: function() {
+        // 播放按钮涉及到音乐的播放与暂停，因此发送事件到状态管理库进行操作
+        playerStore.dispatch("changeMusicPlayStatusAction")
     }
 })
