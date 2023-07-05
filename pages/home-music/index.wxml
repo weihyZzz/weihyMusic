@@ -34,7 +34,7 @@
     <area-header title="推荐歌曲" bind:click="handleMoreClick"></area-header>
     <view >
         <block wx:for="{{recommendSongs}}" wx:key="id">
-            <song-item-v1 item="{{item}}"></song-item-v1>
+            <song-item-v1 item="{{item}}" bindtap="handleSongItemClick" data-index="{{index}}"></song-item-v1>
         </block>
     </view>
 

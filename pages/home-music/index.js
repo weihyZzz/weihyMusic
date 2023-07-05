@@ -1,7 +1,7 @@
 // pages/home-music/index.js
 import { getBanners, getSongMenu } from '../../service/api_music'
 
-import { rankingStore } from '../../store/index'
+import { playerStore, rankingStore } from '../../store/index'
 import queryRect from '../../utils/query-rect'
 import throttle from '../../utils/throttle'
 
@@ -100,5 +100,11 @@ Page({
         wx.navigateTo({
           url: `/pages/detail-songs/index?ranking=${rankingName}&type=rank`,
         })
+    },
+    handleSongItemClick: function(event) {
+        const index = event.currentTarget.dataset.index
+        playerStore.setState("playListSongs", this.data.recommendSongs)
+        playerStore.setState("playListIndex", index)
+        console.log('index',index,this.data.recommendSongs);
     }
 })

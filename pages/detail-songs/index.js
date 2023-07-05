@@ -1,5 +1,5 @@
 // pages/detail-songs/index.js
-import { rankingStore } from '../../store/index'
+import { playerStore, rankingStore } from '../../store/index'
 import { getSongMenuDetail } from '../../service/api_music'
 Page({
 
@@ -36,6 +36,12 @@ Page({
     },
     getRankingDataHandler: function(res) {
         this.setData({ songInfo: res })
+    },
+    handleSongItemClick: function(event) {
+        const index = event.currentTarget.dataset.index
+        playerStore.setState("playListSongs", this.data.songInfo.tracks)
+        playerStore.setState("playListIndex", index)
+        // console.log('index', index, this.data.songInfo.tracks);
     }
 
 })

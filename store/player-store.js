@@ -16,6 +16,8 @@ const playerStore = new HYEventStore({
 
         playModeIndex: 0, //标识播放状态 0:顺序播放 1: 单曲循环 2: 随机播放
         isPlaying: false, //标识音乐播放状态
+        playListSongs: [],//缓存当前播放歌曲所在的歌单列表，用于实现上一首下一首功能
+        playListIndex: 0 // 缓存当前播放歌曲在歌单列表中的序号
     },
     actions: {
         playMusicWithSongIdAction(ctx, { id }) {

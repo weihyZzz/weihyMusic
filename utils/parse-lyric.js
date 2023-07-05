@@ -13,7 +13,7 @@ export function parseLyric(lyricString) {
     // 对每个字符串执行正则
     const timeResult = timeRegExp.exec(lineString)
     if(!timeResult) continue
-    console.log('timeResult时间项:', timeResult);
+    // console.log('timeResult时间项:', timeResult);
     // 1.获取分、秒、毫秒项，然后分别相加算出总时间(均转化为毫秒)
     // 注意做数字转换，不然有些歌曲歌词会有问题
     const minute = parseInt(timeResult[1]*60*1000)
@@ -25,7 +25,7 @@ export function parseLyric(lyricString) {
     
     // 2.获取对应歌词
     const text = lineString.replace(timeRegExp,"") //把匹配的时间换成“”,剩下的就是歌词
-    console.log('当前项总时间(以毫秒为单位)', time,'当前歌词', text);
+    // console.log('当前项总时间(以毫秒为单位)', time,'当前歌词', text);
     lyricInfos.push({ time, text })
   }
   return lyricInfos
