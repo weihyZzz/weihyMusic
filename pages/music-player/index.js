@@ -150,6 +150,6 @@ Page({
     },
     handlePlayBtnClick: function() {
         // 播放按钮涉及到音乐的播放与暂停，因此发送事件到状态管理库进行操作
-        playerStore.dispatch("changeMusicPlayStatusAction")
+        playerStore.dispatch("changeMusicPlayStatusAction", !this.data.isPlaying)
     }
 })

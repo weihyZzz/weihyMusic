@@ -19,9 +19,19 @@ const playerStore = new HYEventStore({
     },
     actions: {
         playMusicWithSongIdAction(ctx, { id }) {
-            // 0.改变音乐播放状态
-            ctx.isPlaying = true
+            // 如果还是同一首歌，就不再次请求音乐
+            if (ctx.id == id) {
+                this.dispatch("changeMusicPlayStatusAction", true)
+                return
+            }
             ctx.id = id
+            // 0.改变音乐播放状态,(擦除上一首歌曲的缓存，避免点击新歌曲，展示上一首歌曲的信息)
+            ctx.isPlaying = true
+            ctx.currentSong = {}
+            ctx.lyricInfos = []
+            ctx.currentTime = 0
+            ctx.currentLyricIndex = 0
+            ctx.currentLyricText = ""
             // 1.获取数据
             // 获取歌曲详情信息
             getSongDetail(id).then(res => {
@@ -74,8 +84,8 @@ const playerStore = new HYEventStore({
                 }
             })
         },
-        changeMusicPlayStatusAction(ctx) {
-            ctx.isPlaying = !ctx.isPlaying
+        changeMusicPlayStatusAction(ctx, isPlaying = true) {
+            ctx.isPlaying = isPlaying
             if (ctx.isPlaying) audioContext.play()
             else audioContext.pause()
         },
