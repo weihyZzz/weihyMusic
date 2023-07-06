@@ -20,9 +20,9 @@ const playerStore = new HYEventStore({
         playListIndex: 0 // 缓存当前播放歌曲在歌单列表中的序号
     },
     actions: {
-        playMusicWithSongIdAction(ctx, { id }) {
+        playMusicWithSongIdAction(ctx, { id, isRefresh = false }) {
             // 如果还是同一首歌，就不再次请求音乐
-            if (ctx.id == id) {
+            if (ctx.id == id && !isRefresh) {
                 this.dispatch("changeMusicPlayStatusAction", true)
                 return
             }
@@ -92,9 +92,39 @@ const playerStore = new HYEventStore({
             else audioContext.pause()
         },
         changeMusicPlayModeAction(ctx) {
+            // 0:顺序播放 1: 单曲循环 2: 随机播放
             let playModeIndex = ctx.playModeIndex + 1
             if (playModeIndex === 3) playModeIndex = 0
             ctx.playModeIndex = playModeIndex
+            let map = {0: '顺序播放', 1: '单曲循环', 2:'随机播放'}
+            console.log('当前播放模式', map[playModeIndex] );
+        },
+        changeNewMusicAction(ctx, isNext = true) {
+            
+            // 点击上一首，下一首，进行新歌曲的播放
+            // 1.获取当前歌曲对应的索引
+            let index = ctx.playListIndex
+            // 2.根据播放模式来更新下一首歌曲的索引
+            switch(ctx.playModeIndex) {
+                case 0:
+                    index = isNext ? index + 1 : index - 1
+                    if(index == -1) index = ctx.playListSongs.length - 1
+                    if(index == ctx.playListSongs.length) index = 0
+                    break
+                case 1:
+                    // case1为单曲循环
+                    break
+                case 2:
+                    // 随机播放
+                    index = Math.floor(Math.random() * ctx.playListSongs.length)
+                    break;
+            }
+            // 3.根据新索引获取歌曲信息
+            console.log('新歌曲index:', index);
+            let currentSong = ctx.playListSongs[index]
+            ctx.playListIndex = index //更新最新的playListIndex
+            // 4.播放新歌曲
+            this.dispatch("playMusicWithSongIdAction", {id: currentSong.id, isRefresh: true})
         }
     }
 })

@@ -46,9 +46,9 @@
         </view>
         <view class="operation">
             <image class="btn btn-mode" bindtap="handleModeBtnClick" src="/assets/images/player/play_{{playModeName}}.png"></image>
-            <image class="btn btn-prev" src="/assets/images/player/play_prev.png"></image>
+            <image class="btn btn-prev" src="/assets/images/player/play_prev.png" bindtap="handlePrevBtnClick"></image>
             <image class="btn btn-pause" bindtap="handlePlayBtnClick" src="/assets/images/player/play_{{playingName}}.png"></image>
-            <image class="btn btn-next" src="/assets/images/player/play_next.png"></image>
+            <image class="btn btn-next" src="/assets/images/player/play_next.png" bindtap="handleNextBtnClick"></image>
             <image class="btn btn-music" src="/assets/images/player/play_music.png"></image>
         </view>
     </swiper-item>
