@@ -31,6 +31,7 @@ page {
     left: 0;
     height: 44px;
     padding: 0 8px;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
     background-color: #fafafa;
 }
 .play-bar .left {
@@ -61,4 +62,17 @@ page {
     width: 25px;
     height: 25px;
     margin-right: 10rpx;
+}
+
+/* 专辑封面旋转动画 */
+@keyframes albumRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.album-anim {
+    animation: albumRotate 10s linear infinite;
 }

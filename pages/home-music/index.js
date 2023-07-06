@@ -17,13 +17,16 @@ Page({
         newSongs: [], //新歌榜
         hipopSongs: [], //云音乐说唱榜
         rankings: { 'netWorkHotRanking': {}, 'newRanking': {}, 'hipopRanking': {} },
-        currentSong: {}
+
+        currentSong: {},//
+        isPlaying: false,
+        playAnimState: "pause"
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function() {
-        playerStore.dispatch("playMusicWithSongIdAction", { id: 1842025914 })
+        playerStore.dispatch("playMusicWithSongIdAction", { id: 1974443814 })
 
         this.getPageData()
         
@@ -47,8 +50,12 @@ Page({
         rankingStore.onState("hipopRanking", this.getRankingHandler("hipopRanking"))
 
         // 播放器监听
-        playerStore.onStates(["currentSong"], ({currentSong}) => {
+        playerStore.onStates(["currentSong","isPlaying"], ({currentSong, isPlaying}) => {
             if (currentSong) this.setData({ currentSong })
+            if(isPlaying !== undefined) {
+                console.log('isPlaying', isPlaying);
+                this.setData({ isPlaying: isPlaying, playAnimState: isPlaying?'running': 'paused' })
+            }
         })
     },
     // 网络请求函数
@@ -90,6 +97,15 @@ Page({
                 rankings: newRankings
             })
         }
+    },
+    handlePlayBtnClick: function(){
+        console.log('点击底部播放栏按钮');
+        playerStore.dispatch("changeMusicPlayStatusAction", !this.data.isPlaying)
+    },
+    handleBarClick: function() {
+        wx.navigateTo({
+          url: '/pages/music-player/index',
+        })
     },
     handleMoreClick: function() {
         // console.log('点击推荐歌曲的更多按钮');
