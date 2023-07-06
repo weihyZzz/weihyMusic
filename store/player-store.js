@@ -85,6 +85,10 @@ const playerStore = new HYEventStore({
                 ctx.currentLyricText = currentLyricInfo.text
                 }
             })
+            // 3.监听歌曲播放完成
+            audioContext.onEnded(() => {
+                this.dispatch("changeNewMusicAction")
+            })
         },
         changeMusicPlayStatusAction(ctx, isPlaying = true) {
             ctx.isPlaying = isPlaying
