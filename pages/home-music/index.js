@@ -16,12 +16,15 @@ Page({
         netWorkSongs: [], //网络热歌榜
         newSongs: [], //新歌榜
         hipopSongs: [], //云音乐说唱榜
-        rankings: { 'netWorkHotRanking': {}, 'newRanking': {}, 'hipopRanking': {} }
+        rankings: { 'netWorkHotRanking': {}, 'newRanking': {}, 'hipopRanking': {} },
+        currentSong: {}
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function() {
+        playerStore.dispatch("playMusicWithSongIdAction", { id: 1842025914 })
+
         this.getPageData()
         
         // 发起共享数据的请求
@@ -42,6 +45,11 @@ Page({
         rankingStore.onState("newRanking", this.getRankingHandler("newRanking"))
         rankingStore.onState("netWorkHotRanking", this.getRankingHandler("netWorkHotRanking"))
         rankingStore.onState("hipopRanking", this.getRankingHandler("hipopRanking"))
+
+        // 播放器监听
+        playerStore.onStates(["currentSong"], ({currentSong}) => {
+            if (currentSong) this.setData({ currentSong })
+        })
     },
     // 网络请求函数
     getPageData: async function() {

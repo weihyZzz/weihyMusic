@@ -70,3 +70,19 @@
     </block>
     <!-- <ranking-area-item item="{{item}}"></ranking-area-item> -->
 </view>
+
+<!-- 底部播放栏 -->
+<view class="play-bar">
+    <view class="left">
+        <image 
+            class="album" 
+            mode="aspectFill" 
+            src="{{currentSong.al.picUrl}}"
+        ></image>
+        <view class="name">{{currentSong.name}}</view>
+    </view>
+    <view class="right">
+        <image class="icon play" src="/assets/images/music/play_icon.png"></image>
+        <image class="icon playlist" src="/assets/images/music/playlist_icon.png"></image>
+    </view>
+</view>
