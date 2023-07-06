@@ -20,6 +20,9 @@ page {
 }
 
 /* 底部播放栏相关样式 */
+.play-bar-placeholder {
+    height: 44px;
+}
 .play-bar {
     display: flex;
     justify-content: space-between;

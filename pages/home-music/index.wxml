@@ -72,7 +72,8 @@
 </view>
 
 <!-- 底部播放栏 -->
-<view class="play-bar" bindtap="handleBarClick">
+<view class="play-bar-placeholder" wx:if="{{currentSong.id}}"></view>
+<view class="play-bar" bindtap="handleBarClick" wx:if="{{currentSong.id}}">
     <view class="left">
         <image 
             class="album album-anim" 
