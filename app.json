@@ -13,6 +13,7 @@
         "navigationBarTitleText": "weihyMusic",
         "navigationBarTextStyle": "black"
     },
+    "requiredBackgroundModes": ["audio"],
     "tabBar": {
         "list": [
             {

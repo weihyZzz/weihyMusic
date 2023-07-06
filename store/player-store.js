@@ -1,8 +1,8 @@
 import { HYEventStore } from 'hy-event-store'
 import { getSongDetail, getSongLyric } from '../service/api_player'
 import { parseLyric } from '../utils/parse-lyric'
-const audioContext = wx.createInnerAudioContext()
-
+// const audioContext = wx.createInnerAudioContext()
+const audioContext = wx.getBackgroundAudioManager()//支持背景音频播放
 const playerStore = new HYEventStore({
     state: {
         id: 0,
@@ -42,6 +42,8 @@ const playerStore = new HYEventStore({
                 // this.setData({ currentSong: res.songs[0], durationTime: res.songs[0].dt })
                 ctx.currentSong = res.songs[0]
                 ctx.durationTime = res.songs[0].dt
+                console.log('name信息',  res.songs[0].name);
+                audioContext.title = res.songs[0].name
             })
             // 获取歌词信息
             getSongLyric(id).then(res => {
@@ -53,6 +55,7 @@ const playerStore = new HYEventStore({
             audioContext.stop()
             audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
             audioContext.autoplay = true
+            audioContext.title = id //如果要支持小程序退出后台依然可以播放，就不能注释掉
             // 3.监听audioContext的事件
             this.dispatch("setupAudioContextListenerAction")
         },
