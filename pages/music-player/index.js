@@ -76,7 +76,7 @@ Page({
       // 2.转换成需要跳转的音乐的秒数
       const currentTime = this.data.durationTime * value / 100
       // 3.设置context播放currentTime位置处的音乐
-      audioContext.pause()
+    //   audioContext.pause()
       // seek API需要转换成 以秒为单位
       audioContext.seek(currentTime / 1000)
       // 4.记录最新的sliderValue

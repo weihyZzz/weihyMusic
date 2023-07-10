@@ -5,6 +5,9 @@ import { parseLyric } from '../utils/parse-lyric'
 const audioContext = wx.getBackgroundAudioManager()//支持背景音频播放
 const playerStore = new HYEventStore({
     state: {
+
+        isStoping: false,
+
         id: 0,
         currentSong: {},
         durationTime: 0,
@@ -92,11 +95,29 @@ const playerStore = new HYEventStore({
             audioContext.onEnded(() => {
                 this.dispatch("changeNewMusicAction")
             })
+            // 4.监听音乐暂停/播放/停止
+            audioContext.onPlay(() => {
+                ctx.isPlaying = true
+            })
+            audioContext.onPause(() => {
+                ctx.isPlaying = false
+            })
+            audioContext.onStop(() => {
+                ctx.isPlaying = false
+                ctx.isStoping = true
+            })
         },
         changeMusicPlayStatusAction(ctx, isPlaying = true) {
             ctx.isPlaying = isPlaying
-            if (ctx.isPlaying) audioContext.play()
-            else audioContext.pause()
+            if (ctx.isPlaying && ctx.isStoping) {
+                audioContext.src = `https://music.163.com/song/media/outer/url?id=${ctx.id}.mp3`
+                audioContext.title = currentSong.name
+            }
+            ctx.isPlaying ? audioContext.play(): audioContext.pause()
+            if (ctx.isStoping) {
+                audioContext.seek(ctx.currentTime)
+                ctx.isStoping = false
+            }
         },
         changeMusicPlayModeAction(ctx) {
             // 0:顺序播放 1: 单曲循环 2: 随机播放
