@@ -21,8 +21,9 @@ function formatDuration(duration) {
     var second = Math.floor(duration % 60)
     return padLeftZero(minute) + ":" + padLeftZero(second)
 }
+
 //   commonjs的导出方式
 module.exports = {
     formatCount: formatCount,
-    formatDuration: formatDuration
+    formatDuration: formatDuration,
 }

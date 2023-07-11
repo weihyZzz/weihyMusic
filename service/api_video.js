@@ -33,3 +33,9 @@ export function getRelatedVideo(id) {
         id
     })
 }
+
+export function getMVComments(id) {
+    return diyRequest.get("/comment/video", {
+        id
+    })
+}

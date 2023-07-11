@@ -7,3 +7,51 @@ page {
     position: fixed;
     top: 0;
 }
+
+/* 用户评论样式 */
+.commentItem {
+    display: flex;
+    flex-direction: column;
+    padding:  10rpx 20rpx;
+}
+.commentItem .userInfo {
+    display: flex;
+    align-items: center;
+    
+}
+.avatar .img {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    justify-content: center;
+    vertical-align: middle;
+}
+.userInfo {
+    display: flex;
+    
+}
+.nickname {
+    font-size: 26rpx;
+    color: #393939;
+}
+.date {
+    font-size: 22rpx;
+    color: #393939;
+}
+
+.comment {
+    margin-left: 80rpx;
+    font-size: 28rpx;
+    margin-top: 10rpx;
+}
+
+.nullComment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.middle {
+    font-size: 58rpx;
+    color: #393939;
+}

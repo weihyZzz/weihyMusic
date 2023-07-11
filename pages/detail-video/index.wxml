@@ -1,3 +1,5 @@
+<!--pages/music-player/index.wxml-->
+<!-- <wxs src="../../utils/format.wxs" module="format"></wxs> -->
 <video 
     class="video" 
     src="{{mvURLInfo.url}}"
@@ -7,6 +9,27 @@
 >
 
 </video>
-<block wx:for="{{100}}" wx:key="*this">
+<!-- <block wx:for="{{100}}" wx:key="*this">
     <view>列表数据{{item}}</view>
+</block> -->
+<view wx:if="{{mvComments.length}}">
+    <block wx:for="{{mvComments}}">
+    <view class="commentItem">
+        <view class="userInfo">
+            <view class="avatar">
+                <image class="img" src="{{item.user.avatarUrl}}"></image>
+            </view>
+            <view class="userName">
+                <view class="nickname">{{item.user.nickname}}</view>
+                <view class="date">{{item.time}}</view>
+            </view>
+        </view>
+        <view class="comment">{{item.content}}</view>
+    </view>
 </block>
+</view>
+<view wx:else class="nullComment">
+    <view class="middle">暂无评论</view>
+</view>
+
+
