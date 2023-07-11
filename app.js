@@ -1,4 +1,6 @@
 // // app.js
+import { getLoginCode, codeToToken } from './service/api_login'
+import { TOKEN_KEY } from './constants/token-const'
 App({
     onLaunch: function() {
         const info = wx.getSystemInfoSync()
@@ -9,6 +11,17 @@ App({
         const deviceRadio = info.screenHeight / info.screenWidth
         this.globalData.deviceRadio = deviceRadio
         console.log('宽高比:', deviceRadio);
+        this.loginAction()
+    },
+    loginAction: async function() {
+        // 1. 获取code
+        const code = await getLoginCode()
+        console.log('code', code);
+        // 2.将code发送给服务器
+        const result = await codeToToken(code)
+        const token = result.token
+        console.log('token:', token);
+        wx.setStorageSync(TOKEN_KEY, token)
     },
     globalData: {
         screenWidth: 0,
