@@ -14,6 +14,26 @@ export function getLoginCode() {
         })
     })
 }
+// 生成token
 export function codeToToken(code) {
     return diyLoginRequest.post("/login", {code})
+}
+// 检查token是否过期
+export function checkToken(token) {
+    return diyLoginRequest.post("/auth", {}, {
+        token
+    })
+}
+// 检查session是否过期
+export function checkSession() {
+    return new Promise((resolve) => {
+        wx.checkSession({
+            success: () => {
+                resolve(true)
+            },
+            fail: () => {
+                resolve(false)
+            }
+        })
+    })
 }

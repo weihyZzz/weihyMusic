@@ -1,8 +1,8 @@
 // // app.js
-import { getLoginCode, codeToToken } from './service/api_login'
+import { getLoginCode, codeToToken, checkToken, checkSession } from './service/api_login'
 import { TOKEN_KEY } from './constants/token-const'
 App({
-    onLaunch: function() {
+    onLaunch: async function() {
         const info = wx.getSystemInfoSync()
         this.globalData.screenWidth = info.screenWidth
         this.globalData.screenHeight = info.screenHeight
@@ -11,7 +11,18 @@ App({
         const deviceRadio = info.screenHeight / info.screenWidth
         this.globalData.deviceRadio = deviceRadio
         console.log('宽高比:', deviceRadio);
-        this.loginAction()
+        // 获取token
+        const token = wx.getStorageSync(TOKEN_KEY)
+        // token有没有过期
+        const checkResult = await checkToken(token)
+        console.log('checkResult', checkResult);
+        // 检查session是否过期
+        const isSessionExpire = await checkSession()
+        console.log('session已经过期?', isSessionExpire);
+        if(!token || checkResult.errorCode || !isSessionExpire) {
+            this.loginAction()
+        }
+        // this.loginAction()
     },
     loginAction: async function() {
         // 1. 获取code
