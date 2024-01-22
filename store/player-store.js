@@ -108,15 +108,19 @@ const playerStore = new HYEventStore({
             })
         },
         changeMusicPlayStatusAction(ctx, isPlaying = true) {
-            ctx.isPlaying = isPlaying
-            if (ctx.isPlaying && ctx.isStoping) {
-                audioContext.src = `https://music.163.com/song/media/outer/url?id=${ctx.id}.mp3`
-                audioContext.title = currentSong.name
-            }
-            ctx.isPlaying ? audioContext.play(): audioContext.pause()
-            if (ctx.isStoping) {
-                audioContext.seek(ctx.currentTime)
-                ctx.isStoping = false
+            try {
+                ctx.isPlaying = isPlaying
+                if (ctx.isPlaying && ctx.isStoping) {
+                    audioContext.src = `https://music.163.com/song/media/outer/url?id=${ctx.id}.mp3`
+                    audioContext.title = currentSong.name
+                }
+                ctx.isPlaying ? audioContext.play(): audioContext.pause()
+                if (ctx.isStoping) {
+                    audioContext.seek(ctx.currentTime)
+                    ctx.isStoping = false
+                }
+            } catch(error) {
+                console.error('Failed to play music:', error.message);
             }
         },
         changeMusicPlayModeAction(ctx) {

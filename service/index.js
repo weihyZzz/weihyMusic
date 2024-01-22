@@ -1,7 +1,10 @@
 import { TOKEN_KEY } from '../constants/token-const'
 const token = wx.getStorageSync(TOKEN_KEY) //获取到用户token，便于后续请求时添加token
 // 依托网易云API，运行本地后端环境，可以根据需要进行更改
+// 本地后端API
 const BASE_URL = "http://localhost:3000"
+// Vercel 部署的后端API
+// const BASE_URL = "https://netease-cloud-music-api-tau-ten-43.vercel.app/"
 // 登录相关的后端,项目名：miniloginserver
 const LOGIN_BASE_URL = "http://localhost:3010"
 class DiyRequest {

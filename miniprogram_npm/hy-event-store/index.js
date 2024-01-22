@@ -4,14 +4,14 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1685954534252, function(require, module, exports) {
+__DEFINE__(1705589097053, function(require, module, exports) {
 module.exports = {
   HYEventBus: require('./event-bus'),
   HYEventStore: require('./event-store')
 }
 
-}, function(modId) {var map = {"./event-bus":1685954534253,"./event-store":1685954534254}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1685954534253, function(require, module, exports) {
+}, function(modId) {var map = {"./event-bus":1705589097054,"./event-store":1705589097055}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1705589097054, function(require, module, exports) {
 class HYEventBus {
   constructor() {
     this.eventBus = {}
@@ -106,7 +106,7 @@ class HYEventBus {
 module.exports = HYEventBus
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1685954534254, function(require, module, exports) {
+__DEFINE__(1705589097055, function(require, module, exports) {
 const EventBus = require("./event-bus")
 const { isObject } = require('./utils')
 
@@ -216,8 +216,8 @@ class HYEventStore {
 
 module.exports = HYEventStore
 
-}, function(modId) { var map = {"./event-bus":1685954534253,"./utils":1685954534255}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1685954534255, function(require, module, exports) {
+}, function(modId) { var map = {"./event-bus":1705589097054,"./utils":1705589097056}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1705589097056, function(require, module, exports) {
 function isObject(obj) {
   var type = typeof obj;
   return type === 'object' && !!obj;
@@ -227,7 +227,7 @@ module.exports = {
   isObject
 }
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1685954534252);
+return __REQUIRE__(1705589097053);
 })()
 //miniprogram-npm-outsideDeps=[]
 //# sourceMappingURL=index.js.map

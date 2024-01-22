@@ -159,6 +159,13 @@ Page({
     handleNextBtnClick: function() {
         console.log('点击下一首');
         playerStore.dispatch("changeNewMusicAction")
-
-    }
+    },
+    handleSongsList: function() {
+        this.navigateToDetailSongPage("hotRanking")
+    },
+    navigateToDetailSongPage: function(rankingName) {
+        wx.navigateTo({
+          url: `/pages/detail-songs/index?ranking=${rankingName}&type=rank`,
+        })
+    },
 })
