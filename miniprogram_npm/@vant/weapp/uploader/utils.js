@@ -41,7 +41,7 @@ function isVideoFile(item) {
 }
 exports.isVideoFile = isVideoFile;
 function formatImage(res) {
-    return res.tempFiles.map(function (item) { return (__assign(__assign({}, (0, utils_1.pickExclude)(item, ['path'])), { type: 'image', url: item.tempFilePath, thumb: item.tempFilePath })); });
+    return res.tempFiles.map(function (item) { return (__assign(__assign({}, (0, utils_1.pickExclude)(item, ['path'])), { type: 'image', url: item.tempFilePath || item.path, thumb: item.tempFilePath || item.path })); });
 }
 function formatVideo(res) {
     return [
@@ -49,7 +49,7 @@ function formatVideo(res) {
     ];
 }
 function formatMedia(res) {
-    return res.tempFiles.map(function (item) { return (__assign(__assign({}, (0, utils_1.pickExclude)(item, ['fileType', 'thumbTempFilePath', 'tempFilePath'])), { type: res.type, url: item.tempFilePath, thumb: res.type === 'video' ? item.thumbTempFilePath : item.tempFilePath })); });
+    return res.tempFiles.map(function (item) { return (__assign(__assign({}, (0, utils_1.pickExclude)(item, ['fileType', 'thumbTempFilePath', 'tempFilePath'])), { type: item.fileType, url: item.tempFilePath, thumb: item.fileType === 'video' ? item.thumbTempFilePath : item.tempFilePath })); });
 }
 function formatFile(res) {
     return res.tempFiles.map(function (item) { return (__assign(__assign({}, (0, utils_1.pickExclude)(item, ['path'])), { url: item.path })); });
@@ -59,16 +59,27 @@ function chooseFile(_a) {
     return new Promise(function (resolve, reject) {
         switch (accept) {
             case 'image':
-                wx.chooseMedia({
-                    count: multiple ? Math.min(maxCount, 9) : 1,
-                    mediaType: ['image'],
-                    sourceType: capture,
-                    maxDuration: maxDuration,
-                    sizeType: sizeType,
-                    camera: camera,
-                    success: function (res) { return resolve(formatImage(res)); },
-                    fail: reject,
-                });
+                if (utils_1.isPC || utils_1.isWxWork) {
+                    wx.chooseImage({
+                        count: multiple ? Math.min(maxCount, 9) : 1,
+                        sourceType: capture,
+                        sizeType: sizeType,
+                        success: function (res) { return resolve(formatImage(res)); },
+                        fail: reject,
+                    });
+                }
+                else {
+                    wx.chooseMedia({
+                        count: multiple ? Math.min(maxCount, 9) : 1,
+                        mediaType: ['image'],
+                        sourceType: capture,
+                        maxDuration: maxDuration,
+                        sizeType: sizeType,
+                        camera: camera,
+                        success: function (res) { return resolve(formatImage(res)); },
+                        fail: reject,
+                    });
+                }
                 break;
             case 'media':
                 wx.chooseMedia({
