@@ -1,9 +1,6 @@
 
 
-# ProjectName
-
-weihyMusic：原生微信小程序
-
+# weihyMusic
 <!-- PROJECT SHIELDS
 
 [![Contributors][contributors-shield]][contributors-url]
