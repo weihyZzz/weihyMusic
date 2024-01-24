@@ -35,6 +35,7 @@ weihyMusic：原生微信小程序
   - [开发前的配置要求](#开发前的配置要求)
   - [安装步骤](#安装步骤)
 - [部署](#部署)
+- [接口文档](#接口文档)
 - [使用到的框架](#使用到的框架)
 - [如何参与开源项目](#如何参与开源项目)
 - [版本控制](#版本控制)
@@ -42,9 +43,6 @@ weihyMusic：原生微信小程序
 - [鸣谢](#鸣谢)
 
 ### 上手指南
-
-
-
 
 
 ###### 开发前的配置要求
@@ -75,7 +73,289 @@ npm install
 - [原生微信小程序](https://developers.weixin.qq.com/miniprogram/dev/framework/)
 - [vant](https://github.com/youzan/vant)
 
-
+### 接口文档
+```
+{
+	"info": {
+		"_postman_id": "8bb8019c-c8a4-4b10-a6ff-cc7d8c268a12",
+		"name": "weihyMusic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24551178"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/artist/list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/artist/list"
+			},
+			"response": []
+		},
+		{
+			"name": "所有榜单",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/toplist"
+			},
+			"response": []
+		},
+		{
+			"name": "热门歌单分类",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrlmusic}}/playlist/hot"
+			},
+			"response": []
+		},
+		{
+			"name": "推荐歌单",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrlmusic}}/personalized"
+			},
+			"response": []
+		},
+		{
+			"name": "推荐歌曲/歌单详情",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/playlist/detail?id=7752312415",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"playlist",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "7752312415"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "歌单",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/top/playlist?limit=6",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"top",
+						"playlist"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "歌单详情动态",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/playlist/detail/dynamic?id=7752312415",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"playlist",
+						"detail",
+						"dynamic"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "7752312415"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "热门搜索",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrlmusic}}/search/hot"
+			},
+			"response": []
+		},
+		{
+			"name": "热门搜索建议",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/search/suggest?keywords=爱&type=mobile",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"search",
+						"suggest"
+					],
+					"query": [
+						{
+							"key": "keywords",
+							"value": "爱"
+						},
+						{
+							"key": "type",
+							"value": "mobile"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "歌曲搜索",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/search?keywords=白兰鸽",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "keywords",
+							"value": "白兰鸽"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取歌曲详情",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/song/detail?ids=2049512697",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"song",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "2049512697"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "歌词详情",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/lyric?id=2049512697",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"lyric"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2049512697"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "逐字歌词",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/lyric/new?id=2049512697",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"lyric",
+						"new"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2049512697"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取视频评论",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrlmusic}}/comment/video?id=14636451",
+					"host": [
+						"{{baseUrlmusic}}"
+					],
+					"path": [
+						"comment",
+						"video"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "14636451"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://123.207.32.32:9001"
+		}
+	]
+}
+```
 ### 如何参与开源项目
 
 贡献使开源社区成为一个学习、激励和创造的绝佳场所。你所作的任何贡献都是**非常感谢**的。
