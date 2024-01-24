@@ -76,186 +76,186 @@ npm install
 ### 接口文档
 ```
 {
-	"info": {
-		"_postman_id": "8bb8019c-c8a4-4b10-a6ff-cc7d8c268a12",
-		"name": "weihyMusic",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "24551178"
-	},
-	"item": [
-		{
-			"name": "localhost:3000/artist/list",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:3000/artist/list"
-			},
-			"response": []
-		},
-		{
-			"name": "所有榜单",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:3000/toplist"
-			},
-			"response": []
-		},
-		{
-			"name": "热门歌单分类",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "{{baseUrlmusic}}/playlist/hot"
-			},
-			"response": []
-		},
-		{
-			"name": "推荐歌单",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "{{baseUrlmusic}}/personalized"
-			},
-			"response": []
-		},
-		{
-			"name": "推荐歌曲/歌单详情",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrlmusic}}/playlist/detail?id=7752312415",
-					"host": [
-						"{{baseUrlmusic}}"
-					],
-					"path": [
-						"playlist",
-						"detail"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "7752312415"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "歌单",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrlmusic}}/top/playlist?limit=6",
-					"host": [
-						"{{baseUrlmusic}}"
-					],
-					"path": [
-						"top",
-						"playlist"
-					],
-					"query": [
-						{
-							"key": "limit",
-							"value": "6"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "歌单详情动态",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrlmusic}}/playlist/detail/dynamic?id=7752312415",
-					"host": [
-						"{{baseUrlmusic}}"
-					],
-					"path": [
-						"playlist",
-						"detail",
-						"dynamic"
-					],
-					"query": [
-						{
-							"key": "id",
-							"value": "7752312415"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "热门搜索",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "{{baseUrlmusic}}/search/hot"
-			},
-			"response": []
-		},
-		{
-			"name": "热门搜索建议",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrlmusic}}/search/suggest?keywords=爱&type=mobile",
-					"host": [
-						"{{baseUrlmusic}}"
-					],
-					"path": [
-						"search",
-						"suggest"
-					],
-					"query": [
-						{
-							"key": "keywords",
-							"value": "爱"
-						},
-						{
-							"key": "type",
-							"value": "mobile"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "歌曲搜索",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrlmusic}}/search?keywords=白兰鸽",
-					"host": [
-						"{{baseUrlmusic}}"
-					],
-					"path": [
-						"search"
-					],
-					"query": [
-						{
-							"key": "keywords",
-							"value": "白兰鸽"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "获取歌曲详情",
-			"request": {
-				"method": "GET",
+  "info": {
+    "_postman_id": "8bb8019c-c8a4-4b10-a6ff-cc7d8c268a12",
+    "name": "weihyMusic",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "_exporter_id": "24551178"
+  },
+  "item": [
+    {
+      "name": "localhost:3000/artist/list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:3000/artist/list"
+      },
+      "response": []
+    },
+    {
+      "name": "所有榜单",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:3000/toplist"
+      },
+      "response": []
+    },
+    {
+      "name": "热门歌单分类",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrlmusic}}/playlist/hot"
+      },
+      "response": []
+    },
+    {
+      "name": "推荐歌单",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrlmusic}}/personalized"
+      },
+      "response": []
+    },
+    {
+      "name": "推荐歌曲/歌单详情",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrlmusic}}/playlist/detail?id=7752312415",
+          "host": [
+            "{{baseUrlmusic}}"
+          ],
+          "path": [
+            "playlist",
+            "detail"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "7752312415"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "歌单",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrlmusic}}/top/playlist?limit=6",
+          "host": [
+            "{{baseUrlmusic}}"
+          ],
+          "path": [
+            "top",
+            "playlist"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "6"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "歌单详情动态",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrlmusic}}/playlist/detail/dynamic?id=7752312415",
+          "host": [
+            "{{baseUrlmusic}}"
+          ],
+          "path": [
+            "playlist",
+            "detail",
+            "dynamic"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "7752312415"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "热门搜索",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrlmusic}}/search/hot"
+      },
+      "response": []
+    },
+    {
+      "name": "热门搜索建议",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrlmusic}}/search/suggest?keywords=爱&type=mobile",
+          "host": [
+            "{{baseUrlmusic}}"
+          ],
+          "path": [
+            "search",
+            "suggest"
+          ],
+          "query": [
+            {
+              "key": "keywords",
+              "value": "爱"
+            },
+            {
+              "key": "type",
+              "value": "mobile"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "歌曲搜索",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrlmusic}}/search?keywords=白兰鸽",
+          "host": [
+            "{{baseUrlmusic}}"
+          ],
+          "path": [
+            "search"
+          ],
+          "query": [
+            {
+              "key": "keywords",
+              "value": "白兰鸽"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "获取歌曲详情",
+      "request": {
+        "method": "GET",
 				"header": [],
 				"url": {
 					"raw": "{{baseUrlmusic}}/song/detail?ids=2049512697",
